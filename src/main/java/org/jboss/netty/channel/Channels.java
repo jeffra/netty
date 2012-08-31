@@ -17,6 +17,7 @@ package org.jboss.netty.channel;
 
 import java.net.SocketAddress;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import org.jboss.netty.util.internal.ConversionUtil;
 
@@ -55,6 +56,9 @@ import org.jboss.netty.util.internal.ConversionUtil;
  */
 public class Channels {
 
+	private static final Logger logger = Logger.getLogger(
+            Channels.class.getName());
+	
     // pipeline factory methods
 
     /**
@@ -540,6 +544,10 @@ public class Channels {
         ChannelFuture future = future(channel, true);
         channel.getPipeline().sendDownstream(new DownstreamChannelStateEvent(
                 channel, future, ChannelState.CONNECTED, remoteAddress));
+        
+        // jtr
+        logger.info("Socket Connected: " + remoteAddress);
+        
         return future;
     }
 
@@ -561,6 +569,9 @@ public class Channels {
         }
         ctx.sendDownstream(new DownstreamChannelStateEvent(
                 ctx.getChannel(), future, ChannelState.CONNECTED, remoteAddress));
+        
+        // jtr
+        logger.info("Socket Connected: " + remoteAddress);
     }
 
     /**
