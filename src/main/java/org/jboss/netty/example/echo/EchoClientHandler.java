@@ -74,9 +74,18 @@ public class EchoClientHandler extends SimpleChannelUpstreamHandler {
     @Override
     public void messageReceived(
             ChannelHandlerContext ctx, MessageEvent e) {
+    	
+    	// Slow down the echo chamber!
+    	try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        }
+    	
         // Send back the received message to the remote peer.
         transferredBytes.addAndGet(((ChannelBuffer) e.getMessage()).readableBytes());
         e.getChannel().write(e.getMessage());
+        System.out.println("CLIENT-RECV: " + e.getMessage());
     }
 
     @Override
