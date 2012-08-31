@@ -50,7 +50,7 @@ public class EchoServerHandler extends SimpleChannelUpstreamHandler {
         // Send back the received message to the remote peer.
         transferredBytes.addAndGet(((ChannelBuffer) e.getMessage()).readableBytes());
         e.getChannel().write(e.getMessage());
-        System.out.println("SERVER-RECV: " + e.getMessage());
+        logger.info("SERVER-RECV: " + e.getMessage());
     }
 
     @Override
