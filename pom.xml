@@ -626,5 +626,21 @@
       </plugin>
     </plugins>
   </build>
-</project>
 
+  <pluginRepositories>
+    <pluginRepository>
+      <id>JBoss Repo</id>
+      <url>https://repository.jboss.org/nexus/content/groups/public-jboss</url>
+      <name>JBoss Repo</name>
+    </pluginRepository>   
+  </pluginRepositories>
+
+  <repositories>
+    <repository>
+      <id>JBoss Repo</id>
+      <url>https://repository.jboss.org/nexus/content/groups/public-jboss</url>
+      <name>JBoss Repo</name>
+    </repository>
+  </repositories>
+  
+</project>
