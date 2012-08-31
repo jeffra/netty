@@ -546,7 +546,10 @@ public class Channels {
                 channel, future, ChannelState.CONNECTED, remoteAddress));
         
         // jtr
-        logger.info("Socket Connected: " + remoteAddress);
+        String strace = "";
+        for (StackTraceElement ste : Thread.currentThread().getStackTrace())
+        	strace += (" " + ste);
+        logger.info("Channel Connected: " + remoteAddress + " due to stack:" + strace);
         
         return future;
     }
