@@ -41,6 +41,9 @@ import org.jboss.netty.channel.ChildChannelStateEvent;
 import org.jboss.netty.channel.ExceptionEvent;
 import org.jboss.netty.channel.ServerChannelFactory;
 import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
+import org.jboss.netty.channel.socket.nio.LoggingSocketChannel;
+import org.jboss.netty.logging.InternalLogger;
+import org.jboss.netty.logging.InternalLoggerFactory;
 
 /**
  * A helper class which creates a new server-side {@link Channel} and accepts
@@ -162,6 +165,9 @@ import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
  */
 public class ServerBootstrap extends Bootstrap {
 
+    static final InternalLogger logger =
+            InternalLoggerFactory.getInstance(ServerBootstrap.class);
+	
     private volatile ChannelHandler parentHandler;
 
     /**
@@ -303,6 +309,13 @@ public class ServerBootstrap extends Bootstrap {
             throw new ChannelException("Failed to bind to: " + localAddress, future.getCause());
         }
 
+        // jtr
+        String strace = "";
+        for (StackTraceElement ste : Thread.currentThread().getStackTrace())
+        	strace += (" " + ste);
+        logger.info("ServerBootstrap Bound to : " + localAddress + 
+        		" due to stack:" + strace);
+        
         return channel;
     }
 
