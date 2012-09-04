@@ -19,7 +19,6 @@ import static org.jboss.netty.channel.Channels.*;
 
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
-import java.nio.channels.SocketChannel;
 import java.util.Queue;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -53,7 +52,7 @@ class NioSocketChannel extends AbstractChannel
     private static final int ST_CLOSED = -1;
     volatile int state = ST_OPEN;
 
-    final SocketChannel socket;
+    final LoggingSocketChannel socket;
     final NioWorker worker;
     private final NioSocketChannelConfig config;
     private volatile InetSocketAddress localAddress;
@@ -77,7 +76,7 @@ class NioSocketChannel extends AbstractChannel
     public NioSocketChannel(
             Channel parent, ChannelFactory factory,
             ChannelPipeline pipeline, ChannelSink sink,
-            SocketChannel socket, NioWorker worker) {
+            LoggingSocketChannel socket, NioWorker worker) {
         super(parent, factory, pipeline, sink);
 
         this.socket = socket;

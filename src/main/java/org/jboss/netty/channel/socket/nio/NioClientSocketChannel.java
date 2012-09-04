@@ -41,7 +41,7 @@ final class NioClientSocketChannel extends NioSocketChannel {
     private static final InternalLogger logger =
         InternalLoggerFactory.getInstance(NioClientSocketChannel.class);
 
-    private static SocketChannel newSocket() {
+    private static LoggingSocketChannel newSocket() {
         SocketChannel socket;
         try {
             socket = SocketChannel.open();
@@ -67,7 +67,7 @@ final class NioClientSocketChannel extends NioSocketChannel {
             }
         }
 
-        return socket;
+        return new LoggingSocketChannel(socket);
     }
 
     volatile ChannelFuture connectFuture;

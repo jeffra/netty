@@ -17,8 +17,6 @@ package org.jboss.netty.channel.socket.nio;
 
 import static org.jboss.netty.channel.Channels.*;
 
-import java.nio.channels.SocketChannel;
-
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelFactory;
 import org.jboss.netty.channel.ChannelPipeline;
@@ -39,7 +37,7 @@ final class NioAcceptedSocketChannel extends NioSocketChannel {
     NioAcceptedSocketChannel(
             ChannelFactory factory, ChannelPipeline pipeline,
             Channel parent, ChannelSink sink,
-            SocketChannel socket, NioWorker worker, Thread bossThread) {
+            LoggingSocketChannel socket, NioWorker worker, Thread bossThread) {
 
         super(parent, factory, pipeline, sink, socket, worker);
 

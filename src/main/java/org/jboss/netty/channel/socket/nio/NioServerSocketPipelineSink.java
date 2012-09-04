@@ -241,7 +241,7 @@ class NioServerSocketPipelineSink extends AbstractChannelSink {
                             selector.selectedKeys().clear();
                         }
 
-                        SocketChannel acceptedSocket = channel.socket.accept();
+                        LoggingSocketChannel acceptedSocket = new LoggingSocketChannel(channel.socket.accept());
                         if (acceptedSocket != null) {
                             registerAcceptedChannel(acceptedSocket, currentThread);
                         }
@@ -271,7 +271,7 @@ class NioServerSocketPipelineSink extends AbstractChannelSink {
             }
         }
 
-        private void registerAcceptedChannel(SocketChannel acceptedSocket, Thread currentThread) {
+        private void registerAcceptedChannel(LoggingSocketChannel acceptedSocket, Thread currentThread) {
             try {
                 ChannelPipeline pipeline =
                     channel.getConfig().getPipelineFactory().getPipeline();

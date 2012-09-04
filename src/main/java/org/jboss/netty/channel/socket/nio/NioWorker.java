@@ -442,7 +442,7 @@ class NioWorker implements Runnable {
         long writtenBytes = 0;
 
         final SocketSendBufferPool sendBufferPool = this.sendBufferPool;
-        final SocketChannel ch = channel.socket;
+        final LoggingSocketChannel ch = channel.socket;
         final Queue<MessageEvent> writeBuffer = channel.writeBuffer;
         final int writeSpinCount = channel.getConfig().getWriteSpinCount();
         synchronized (channel.writeLock) {
@@ -466,7 +466,8 @@ class NioWorker implements Runnable {
                 try {
                     long localWrittenBytes = 0;
                     for (int i = writeSpinCount; i > 0; i --) {
-                        localWrittenBytes = buf.transferTo(ch);
+                    	//TODO: Do we need to deal with this?
+                        localWrittenBytes = buf.transferTo(ch.getRealSocketChannel());
                         if (localWrittenBytes != 0) {
                             writtenBytes += localWrittenBytes;
                             break;
