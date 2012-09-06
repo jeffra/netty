@@ -313,7 +313,7 @@ public class ServerBootstrap extends Bootstrap {
         String strace = "";
         for (StackTraceElement ste : Thread.currentThread().getStackTrace())
         	strace += (" " + ste);
-        logger.info("ServerBootstrap Bound to : " + localAddress + 
+        logger.info("<jtr> ServerBootstrap Bound to : " + localAddress + 
         		" due to stack:" + strace);
         
         return channel;

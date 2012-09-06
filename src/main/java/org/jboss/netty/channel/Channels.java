@@ -549,7 +549,7 @@ public class Channels {
         String strace = "";
         for (StackTraceElement ste : Thread.currentThread().getStackTrace())
         	strace += (" " + ste);
-        logger.info("Channel Connected: " + remoteAddress + " due to stack:" + strace);
+        logger.info("<jtr> Channel Connected: " + remoteAddress + " due to stack:" + strace);
         
         return future;
     }
